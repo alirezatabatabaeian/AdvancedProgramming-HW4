@@ -1,0 +1,33 @@
+////////////////////////////////////////////////
+template <typename T>
+UniquePtr<T>::UniquePtr(T* ptr)
+    : _p { ptr }
+{
+}
+////////////////////////////////////////////////
+template <typename T>
+UniquePtr<T>::UniquePtr()
+    : _p { nullptr }
+{
+}
+////////////////////////////////////////////////
+template <typename T>
+UniquePtr<T>::UniquePtr(UniquePtr<T> unique_ptr)
+{
+    
+}
+
+////////////////////////////////////////////////
+template <typename T>
+UniquePtr<T>::~UniquePtr()
+{
+    delete _p;
+    _p = nullptr;
+}
+////////////////////////////////////////////////
+template <typename T>
+T UniquePtr<T>::operator*()
+{
+    return *(this->_p);
+}
+////////////////////////////////////////////////
