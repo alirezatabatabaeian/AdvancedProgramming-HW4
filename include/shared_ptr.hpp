@@ -23,19 +23,26 @@ SharedPtr<T>::SharedPtr(SharedPtr<T>& shared_ptr)
 template <typename T>
 void SharedPtr<T>::operator=(SharedPtr<T>& shared_ptr)
 {
-    if (this->_p == shared_ptr.p) {
+    if (this->_p == shared_ptr._p) {
     } else {
         _p = shared_ptr._p;
         counter = &(++(*shared_ptr.counter));
     }
 }
 ////////////////////////////////////////////////
-// template <typename T>
-// SharedPtr<T>::~SharedPtr()
-// {
-//     delete _p;
-//     _p = nullptr;
-// }
+template <typename T>
+SharedPtr<T>::~SharedPtr()
+{
+    if (*(this->counter) == 0) {
+
+    } else if (*(this->counter) == 1) {
+        delete _p;
+        _p = nullptr;
+    } else {
+        _p = nullptr;
+        *counter -= 1;
+    }
+}
 ////////////////////////////////////////////////
 template <typename T>
 T SharedPtr<T>::operator*()

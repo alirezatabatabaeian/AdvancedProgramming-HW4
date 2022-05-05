@@ -130,10 +130,11 @@ TEST(HW4Test, TEST13)
     EXPECT_EQ(ptr2.use_count(), 2);
 }
 
-TEST(HW4Test, TEST14) {
-    SharedPtr<std::string> ptr1{make_shared<std::string>("hello world!")};
-    SharedPtr<std::string> ptr2{ptr1};
-    SharedPtr<std::string> ptr3{ptr1};
+TEST(HW4Test, TEST14)
+{
+    SharedPtr<std::string> ptr1 { make_shared<std::string>("hello world!") };
+    SharedPtr<std::string> ptr2 { ptr1 };
+    SharedPtr<std::string> ptr3 { ptr1 };
     EXPECT_EQ(*ptr1, "hello world!");
     EXPECT_EQ(*ptr1, "hello world!");
     EXPECT_EQ(*ptr2, "hello world!");
@@ -144,24 +145,25 @@ TEST(HW4Test, TEST14) {
     EXPECT_EQ(ptr3.use_count(), 3);
 }
 
-// TEST(HW4Test, TEST15) {
-//     SharedPtr<std::string> ptr1{make_shared<std::string>("hello world!")};
-//     {
-//         {
-//             SharedPtr<std::string> ptr2{ptr1};
-//             EXPECT_EQ(ptr1.use_count(), 2);
-//             EXPECT_EQ(ptr2.use_count(), 2);
-//         }
-//         EXPECT_EQ(ptr1.use_count(), 1);
-//         SharedPtr<std::string> ptr3{ptr1};
-//         EXPECT_EQ(ptr1.use_count(), 2);
-//         EXPECT_EQ(ptr3.use_count(), 2);
-//     }
-//     EXPECT_EQ(ptr1.use_count(), 1);
-//     ptr1.~SharedPtr();
-//     EXPECT_EQ(ptr1.use_count(), 0);
-//     EXPECT_EQ(ptr1.get(), nullptr);
-// }
+TEST(HW4Test, TEST15)
+{
+    SharedPtr<std::string> ptr1 { make_shared<std::string>("hello world!") };
+    {
+        {
+            SharedPtr<std::string> ptr2 { ptr1 };
+            EXPECT_EQ(ptr1.use_count(), 2);
+            EXPECT_EQ(ptr2.use_count(), 2);
+        }
+        // EXPECT_EQ(ptr1.use_count(), 1);
+        // SharedPtr<std::string> ptr3 { ptr1 };
+        // EXPECT_EQ(ptr1.use_count(), 2);
+        // EXPECT_EQ(ptr3.use_count(), 2);
+    }
+    // EXPECT_EQ(ptr1.use_count(), 1);
+    // ptr1.~SharedPtr();
+    // EXPECT_EQ(ptr1.use_count(), 0);
+    // EXPECT_EQ(ptr1.get(), nullptr);
+}
 
 TEST(HW4Test, TEST16)
 {
@@ -184,18 +186,20 @@ TEST(HW4Test, TEST17)
     EXPECT_FALSE(ptr3->empty());
 }
 
-TEST(HW4Test, TEST18) {
-    SharedPtr<std::string> ptr{new std::string{"hello world!"}};
+TEST(HW4Test, TEST18)
+{
+    SharedPtr<std::string> ptr { new std::string { "hello world!" } };
     EXPECT_EQ(ptr->length(), 12);
     ptr.reset();
     EXPECT_EQ(ptr.get(), nullptr);
     EXPECT_EQ(ptr.use_count(), 0);
 }
 
-TEST(HW4Test, TEST19) {
-    SharedPtr<std::string> ptr{new std::string{"hello world!"}};
+TEST(HW4Test, TEST19)
+{
+    SharedPtr<std::string> ptr { new std::string { "hello world!" } };
     EXPECT_EQ(ptr->length(), 12);
-    ptr.reset(new std::string{"nice job!"});
+    ptr.reset(new std::string { "nice job!" });
     EXPECT_EQ(*ptr, "nice job!");
     EXPECT_EQ(ptr.use_count(), 1);
 }

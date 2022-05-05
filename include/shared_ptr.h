@@ -7,7 +7,7 @@ public:
     SharedPtr(T* ptr);
     SharedPtr(SharedPtr<T>& shared_ptr);
     SharedPtr();
-    // ~SharedPtr();
+    ~SharedPtr();
     T* get() { return _p; }
     void operator=(SharedPtr<T>& shared_ptr);
     int use_count();
