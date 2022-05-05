@@ -18,11 +18,41 @@ SharedPtr<T>::~SharedPtr()
     _p = nullptr;
 }
 ////////////////////////////////////////////////
-
+template <typename T>
+T SharedPtr<T>::operator*()
+{
+    return *_p;
+}
 ////////////////////////////////////////////////
-
+template <typename T>
+T* SharedPtr<T>::operator->()
+{
+    return _p;
+}
 ////////////////////////////////////////////////
-
+template <typename T>
+void SharedPtr<T>::reset()
+{
+    delete _p;
+    _p = nullptr;
+}
+////////////////////////////////////////////////
+template <typename T>
+SharedPtr<T>& SharedPtr<T>::reset(T* ptr)
+{
+    delete _p;
+    _p = ptr;
+    return *this;
+}
+////////////////////////////////////////////////
+template <typename T>
+SharedPtr<T>::operator bool()
+{
+    if (_p == nullptr)
+        return false;
+    else
+        return true;
+}
 ////////////////////////////////////////////////
 
 ////////////////////////////////////////////////
