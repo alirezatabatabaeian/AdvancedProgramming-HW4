@@ -38,6 +38,7 @@ SharedPtr<T>::~SharedPtr()
     } else if (*(this->counter) == 1) {
         delete _p;
         _p = nullptr;
+        *counter = 0;
     } else {
         _p = nullptr;
         *counter -= 1;

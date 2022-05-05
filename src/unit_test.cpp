@@ -154,15 +154,15 @@ TEST(HW4Test, TEST15)
             EXPECT_EQ(ptr1.use_count(), 2);
             EXPECT_EQ(ptr2.use_count(), 2);
         }
-        // EXPECT_EQ(ptr1.use_count(), 1);
-        // SharedPtr<std::string> ptr3 { ptr1 };
-        // EXPECT_EQ(ptr1.use_count(), 2);
-        // EXPECT_EQ(ptr3.use_count(), 2);
+        EXPECT_EQ(ptr1.use_count(), 1);
+        SharedPtr<std::string> ptr3 { ptr1 };
+        EXPECT_EQ(ptr1.use_count(), 2);
+        EXPECT_EQ(ptr3.use_count(), 2);
     }
-    // EXPECT_EQ(ptr1.use_count(), 1);
-    // ptr1.~SharedPtr();
-    // EXPECT_EQ(ptr1.use_count(), 0);
-    // EXPECT_EQ(ptr1.get(), nullptr);
+    EXPECT_EQ(ptr1.use_count(), 1);
+    ptr1.~SharedPtr();
+    EXPECT_EQ(ptr1.use_count(), 0);
+    EXPECT_EQ(ptr1.get(), nullptr);
 }
 
 TEST(HW4Test, TEST16)
