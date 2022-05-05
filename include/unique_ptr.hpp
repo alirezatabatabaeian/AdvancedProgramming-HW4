@@ -32,8 +32,9 @@ T UniquePtr<T>::operator*()
 }
 ////////////////////////////////////////////////
 template <typename T>
-void UniquePtr<T>::operator=(UniquePtr<T>& unique_ptr){
-    
+void UniquePtr<T>::operator=(UniquePtr<T>& unique_ptr)
+{
+    // #error "Compiler Error : Equal Operator is Banned"
 }
 
 ////////////////////////////////////////////////
