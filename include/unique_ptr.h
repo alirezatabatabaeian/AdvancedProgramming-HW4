@@ -11,6 +11,10 @@ public:
     T* get() { return _p; }
     T operator*();
     void operator=(UniquePtr<T>& unique_ptr);
+    T* operator->();
+    void reset();
+    UniquePtr<T>& reset(T* ptr);
+
 
 private:
     T* _p;

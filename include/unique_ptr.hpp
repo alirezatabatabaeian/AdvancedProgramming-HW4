@@ -28,7 +28,7 @@ UniquePtr<T>::~UniquePtr()
 template <typename T>
 T UniquePtr<T>::operator*()
 {
-    return *(this->_p);
+    return *_p;
 }
 ////////////////////////////////////////////////
 template <typename T>
@@ -37,4 +37,25 @@ void UniquePtr<T>::operator=(UniquePtr<T>& unique_ptr)
     // #error "Compiler Error : Equal Operator is Banned"
 }
 
+////////////////////////////////////////////////
+template <typename T>
+T* UniquePtr<T>::operator->()
+{
+    return _p;
+}
+////////////////////////////////////////////////
+template <typename T>
+void UniquePtr<T>::reset()
+{
+    delete _p;
+    _p = nullptr;
+}
+////////////////////////////////////////////////
+template <typename T>
+UniquePtr<T>& UniquePtr<T>::reset(T* ptr)
+{
+    delete _p;
+    _p = ptr;
+    return *this;
+}
 ////////////////////////////////////////////////
