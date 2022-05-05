@@ -8,9 +8,6 @@ int main(int argc, char** argv)
     if (false) // make false to run unit-tests
     {
         // debug section
-        // std::cout << new int { 10 } << std::endl;
-        // UniquePtr<int> ptr1 { new int { 10 } };
-        // UniquePtr<int> ptr2 { ptr1 };
 
     } else {
         ::testing::InitGoogleTest(&argc, argv);
