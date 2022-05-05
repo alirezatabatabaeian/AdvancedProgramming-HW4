@@ -14,7 +14,8 @@ public:
     T* operator->();
     void reset();
     UniquePtr<T>& reset(T* ptr);
-
+    operator bool();
+    T* release();
 
 private:
     T* _p;

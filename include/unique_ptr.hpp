@@ -14,7 +14,7 @@ UniquePtr<T>::UniquePtr()
 template <typename T>
 UniquePtr<T>::UniquePtr(UniquePtr<T>& unique_ptr)
 {
-    // #error "Compiler Error : Copy Constructor is Banned"
+    static_assert(true, "Compiler Error : Copy Constructor is Banned");
 }
 
 ////////////////////////////////////////////////
@@ -34,7 +34,7 @@ T UniquePtr<T>::operator*()
 template <typename T>
 void UniquePtr<T>::operator=(UniquePtr<T>& unique_ptr)
 {
-    // #error "Compiler Error : Equal Operator is Banned"
+    static_assert(true, "Compiler Error : Equal Operator is Banned");
 }
 
 ////////////////////////////////////////////////
@@ -58,4 +58,22 @@ UniquePtr<T>& UniquePtr<T>::reset(T* ptr)
     _p = ptr;
     return *this;
 }
+////////////////////////////////////////////////
+template <typename T>
+UniquePtr<T>::operator bool()
+{
+    if (_p == nullptr)
+        return false;
+    else
+        return true;
+}
+////////////////////////////////////////////////
+template <typename T>
+T* UniquePtr<T>::release()
+{
+    T* temp { _p };
+    _p = nullptr;
+    return temp;
+}
+
 ////////////////////////////////////////////////
