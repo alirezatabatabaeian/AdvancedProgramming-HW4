@@ -5,10 +5,12 @@ template <typename T>
 class SharedPtr {
 public:
     SharedPtr(T* ptr);
-    // SharedPtr(SharedPtr<T>& shared_ptr) = delete;
+    SharedPtr(SharedPtr<T>& shared_ptr);
     SharedPtr();
-    ~SharedPtr();
+    // ~SharedPtr();
     T* get() { return _p; }
+    void operator=(SharedPtr<T>& shared_ptr);
+    int use_count();
     T operator*();
     T* operator->();
     void reset();
@@ -17,6 +19,7 @@ public:
 
 private:
     T* _p;
+    int* counter;
 };
 
 template <typename T>

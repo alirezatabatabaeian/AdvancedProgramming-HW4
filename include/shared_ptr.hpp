@@ -2,21 +2,40 @@
 template <typename T>
 SharedPtr<T>::SharedPtr(T* ptr)
     : _p { ptr }
+    , counter { new int { 1 } }
 {
 }
 ////////////////////////////////////////////////
 template <typename T>
 SharedPtr<T>::SharedPtr()
     : _p { nullptr }
+    , counter { new int { 0 } }
 {
 }
 ////////////////////////////////////////////////
 template <typename T>
-SharedPtr<T>::~SharedPtr()
+SharedPtr<T>::SharedPtr(SharedPtr<T>& shared_ptr)
+    : _p { shared_ptr._p }
+    , counter { &(++(*shared_ptr.counter)) }
 {
-    delete _p;
-    _p = nullptr;
 }
+////////////////////////////////////////////////
+template <typename T>
+void SharedPtr<T>::operator=(SharedPtr<T>& shared_ptr)
+{
+    if (this->_p == shared_ptr.p) {
+    } else {
+        _p = shared_ptr._p;
+        counter = &(++(*shared_ptr.counter));
+    }
+}
+////////////////////////////////////////////////
+// template <typename T>
+// SharedPtr<T>::~SharedPtr()
+// {
+//     delete _p;
+//     _p = nullptr;
+// }
 ////////////////////////////////////////////////
 template <typename T>
 T SharedPtr<T>::operator*()
@@ -35,6 +54,7 @@ void SharedPtr<T>::reset()
 {
     delete _p;
     _p = nullptr;
+    counter = new int { 0 };
 }
 ////////////////////////////////////////////////
 template <typename T>
@@ -42,6 +62,7 @@ SharedPtr<T>& SharedPtr<T>::reset(T* ptr)
 {
     delete _p;
     _p = ptr;
+    counter = new int { 1 };
     return *this;
 }
 ////////////////////////////////////////////////
@@ -54,9 +75,9 @@ SharedPtr<T>::operator bool()
         return true;
 }
 ////////////////////////////////////////////////
-
-////////////////////////////////////////////////
-
-////////////////////////////////////////////////
-
+template <typename T>
+int SharedPtr<T>::use_count()
+{
+    return *counter;
+}
 ////////////////////////////////////////////////
