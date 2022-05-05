@@ -5,11 +5,12 @@ template <typename T>
 class UniquePtr {
 public:
     UniquePtr(T* ptr);
+    UniquePtr(UniquePtr<T>& unique_ptr);
     UniquePtr();
-    UniquePtr(UniquePtr<T> unique_ptr);
     ~UniquePtr();
     T* get() { return _p; }
     T operator*();
+    void operator=(UniquePtr<T>& unique_ptr);
 
 private:
     T* _p;

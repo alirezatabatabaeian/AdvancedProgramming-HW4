@@ -12,9 +12,9 @@ UniquePtr<T>::UniquePtr()
 }
 ////////////////////////////////////////////////
 template <typename T>
-UniquePtr<T>::UniquePtr(UniquePtr<T> unique_ptr)
+UniquePtr<T>::UniquePtr(UniquePtr<T>& unique_ptr)
 {
-    
+    // #error "Compiler Error : Copy Constructor is Banned"
 }
 
 ////////////////////////////////////////////////
@@ -30,4 +30,10 @@ T UniquePtr<T>::operator*()
 {
     return *(this->_p);
 }
+////////////////////////////////////////////////
+template <typename T>
+void UniquePtr<T>::operator=(UniquePtr<T>& unique_ptr){
+    
+}
+
 ////////////////////////////////////////////////
